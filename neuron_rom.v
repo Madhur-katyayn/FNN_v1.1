@@ -16,7 +16,6 @@ module neuron_RAM
 	output reg                        loaded
 	);
 	
-//   parameter RAM_WIDTH = 16, RAM_ADDR_BITS = $clog2(Depth);
    
    
    (* RAM_STYLE="BLOCK" *)
@@ -36,12 +35,6 @@ module neuron_RAM
                 weight_mem[i]=0;
             end
         end
- 
-//        file = $fopen(DATA_FILE,"r");
-//        for (i=0; i<Depth; i=i+1) begin  
-//        $fscanf(file,"%d",weight_mem[i]);                
-//        end
-//        $fclose(file);
         if((counter<=Depth)&&(weights_in!==16'bx))
         begin
             weight_mem[counter]=weights_in;
@@ -55,7 +48,4 @@ module neuron_RAM
             weights_out=weight_mem[address];
     end
     end
-      
-//    assign output_data = weight_mem[address];
-
 endmodule
