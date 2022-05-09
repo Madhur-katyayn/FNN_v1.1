@@ -1,5 +1,4 @@
 `timescale 1ns / 1ps
-//////////////////////////////////////////////////////////////////////////////////
 
 module testbench();
 parameter WEIGHT_WIDTH=16, PART_NO_WIDTH=7, NN1=40, NN2=10, NN3=10, NN4=10, NO_OF_INPUTS=784, INDATA_WIDTH=16;
@@ -25,7 +24,6 @@ begin
 clk=0;
 count=0;
 count2=0;
-//restart=1;
 end
 
 
@@ -33,55 +31,12 @@ always
 #10 clk=~clk;
 
  initial
-		begin
-	        $readmemb("weights_and_biases.mif", weight_bus_memory);
-	        $readmemb("input_data_2.mif", indata_mem);
-	         loaded_in_memory=1;
-	    end
+ begin
+	 $readmemb("weights_and_biases.mif", weight_bus_memory);
+	 $readmemb("input_data_2.mif", indata_mem);  // This need to be changed for detecting different digits.
+	 loaded_in_memory=1;
+ end
 	    
-//always @(negedge clk)
-//begin
-//if(count==3)
-//load_weights=1;
-//if(x==0)
-//begin
-//if(count>3)
-//begin
-//weight_valid=1;
-//weight_bus=weight_bus_memory[count2];
-//count2=count2+1;
-////end
-//end
-//count=count+1;
-//if(FNN_ready)
-//begin
-//x=1;
-//weight_valid=0;
-//load_weights=0;
-//start_FNN=1;
-//ready_in=1;
-//end
-//end
-//if(FNN_ready_to_accept)
-//begin
-//if(i<NO_OF_INPUTS)
-//begin
-//input_image=indata_mem[i] ;
-//i=i+1;
-//end
-//end
-
-//if(finish_FNN)
-//begin
-//restart=1;
-//end
-////else if(finish_FNN==0)
-////begin
-////restart=0;
-////end
-//end
-
-
 always @(negedge clk)
 begin
 case(state)
@@ -122,7 +77,6 @@ S1: begin
     weight_valid=1;
     weight_bus=weight_bus_memory[count2];
     count2=count2+1;
-//end
     end
     count=count+1;
     end
