@@ -80,9 +80,7 @@ always @(negedge clk)
         neurons_finished3=0;
         end
     S1: begin
-//        if(!valid_input)
-//        in_data3=input_data;
-//        valid_input_3 =1;
+        // Do Nothing :)
         end
     S2: begin
         if(shift3)
@@ -111,11 +109,6 @@ always @(negedge clk)
         neurons_finished3<=1;
         end
         end
-//         if(finished3=={NN3{1'b0}})
-//        begin
-//        neurons_finished3<=0;
-////        transferred3<=;
-//        end
         if(weights_loaded3=={NN3{1'b1}})
         begin
         layer_3_ready=1;
