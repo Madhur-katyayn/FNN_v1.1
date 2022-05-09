@@ -86,8 +86,6 @@ module Layer1 # (parameter INDATA_WIDTH = 17,WEIGHT_WIDTH=16, NN1=30, PREVLAYER_
     S1: begin
         if(!valid_input)
         begin
-//        valid_input1=1;
-//        in_data1=input_data;
         end
         end
     S2: begin
@@ -114,11 +112,8 @@ module Layer1 # (parameter INDATA_WIDTH = 17,WEIGHT_WIDTH=16, NN1=30, PREVLAYER_
         begin
         y<=1;
         neurons_finished1<=1;
-//        transferred1<=0;
         end
         end
-//        if(finished1=={NN1{1'b0}})
-//        neurons_finished1<=0;
         if(weights_loaded1=={NN1{1'b1}})
         begin
         layer_1_ready<=1;
