@@ -82,9 +82,7 @@ module Layer4 # (parameter INDATA_WIDTH = 44, NN4=10,WEIGHT_WIDTH=16, PREVLAYER_
         neurons_finished4=0;
         end
     S1: begin
-//        if(!valid_input)
-//        in_data4=input_data;
-//        valid_input_4=1;
+        // Do nothing
         end
     S2: begin
         if(shift4)
@@ -115,11 +113,6 @@ module Layer4 # (parameter INDATA_WIDTH = 44, NN4=10,WEIGHT_WIDTH=16, PREVLAYER_
         neurons_finished4<=1;
         end
         end
-//        if(finished4=={NN4{1'b0}})
-//        begin
-//        neurons_finished4<=0;
-////        transferred4<=0;
-//        end
         if(weights_loaded4=={NN4{1'b1}})
         begin
         layer_4_ready=1;
