@@ -180,15 +180,6 @@ max_finder #(.INDATA_WIDTH(INDATA_WIDTH+3+3+3+3),.NN4(NN_L4),.PREVLAYER_COUNT(NN
     begin
         case(state_FNN)
         S0: begin
-//            max=0;
-//            file = $fopen("maxpool_out.txt","r");
-//             for (i=0; i<NO_INPUTS; i=i+1) begin  
-//             $fscanf(file,"%d",indata_mem[i]); 
-//             end
-//             $fclose(file);
-//		      begin
-//	           $readmemb("input_data_0.mif", indata_mem);
-//	           end
              loaded=1;
              i=0;
              count=1;
@@ -216,8 +207,6 @@ max_finder #(.INDATA_WIDTH(INDATA_WIDTH+3+3+3+3),.NN4(NN_L4),.PREVLAYER_COUNT(NN
             in_state_0=1;
             if(weight_valid)
             begin
-//                weight_valid_buff=1;
-//                load_weights_buff=1;
                 weights_bus_buff=weight_bus;
             end
             if(layer_1_ready && layer_2_ready && layer_3_ready && layer_4_ready)
@@ -227,7 +216,6 @@ max_finder #(.INDATA_WIDTH(INDATA_WIDTH+3+3+3+3),.NN4(NN_L4),.PREVLAYER_COUNT(NN
             
             rstn1=0;
             in_state_0=1; 
-//            FNN_in_state_2=1;
             if(restart)
             restart1=1;
             else
@@ -248,8 +236,6 @@ max_finder #(.INDATA_WIDTH(INDATA_WIDTH+3+3+3+3),.NN4(NN_L4),.PREVLAYER_COUNT(NN
                 count=count+1;
                 
             end
-//            if((i> NO_INPUTS)||(count<1))
-//            valid_input1=1;
             end
         S3: begin
             layer1_input=0;
@@ -268,15 +254,8 @@ max_finder #(.INDATA_WIDTH(INDATA_WIDTH+3+3+3+3),.NN4(NN_L4),.PREVLAYER_COUNT(NN
             start2=1;
             if(neurons_instate_L2=={(NN_L2){1'b1}})
             begin
-                
-                valid_input2=0;
-//                if(count2>2)
-//                begin
-                   shift1=1;
-//                end
-//            if(count2<=1)
-//            valid_input2=1;
-                count2=count2+1;
+            valid_input2=0;
+            shift1=1;
             end
             end
         S4: begin
@@ -298,15 +277,8 @@ max_finder #(.INDATA_WIDTH(INDATA_WIDTH+3+3+3+3),.NN4(NN_L4),.PREVLAYER_COUNT(NN
                 restart2=0;
                 if(neurons_instate_L3=={(NN_L3){1'b1}})
                 begin
-                
-                 shift2=1;
-//                if(count3>2)
-//                begin
-                   valid_input3=0;
-//                end
-//                if(count3<=1)
-//                    valid_input3=1;
-                count3=count3+1;
+                shift2=1;
+                valid_input3=0;
                 end
             end
             end
@@ -329,16 +301,8 @@ max_finder #(.INDATA_WIDTH(INDATA_WIDTH+3+3+3+3),.NN4(NN_L4),.PREVLAYER_COUNT(NN
             restart3=0;
             if(neurons_instate_L4=={(NN_L4){1'b1}})
             begin
-             
-              shift3=1;            
-//            if(count4>2)
-//            begin
-               valid_input4=0;
-//            end
-//            if(count4<=1)
-//                valid_input4=1;
-            count4=count4+1;
-//            rstn_max=0;
+            shift3=1;            
+            valid_input4=0;
             end
             end
             reset_max_finder=1;
@@ -358,7 +322,6 @@ max_finder #(.INDATA_WIDTH(INDATA_WIDTH+3+3+3+3),.NN4(NN_L4),.PREVLAYER_COUNT(NN
             shift4=1;
             reset_max_finder=0;
             find_max=1;
-//            rstn_max=1;
             stop_iteration=1;
             end
             end
