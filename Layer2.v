@@ -80,11 +80,6 @@ always @(negedge clk)
         neurons_finished2=0;
         end
     S1: begin
-        if(!valid_input)
-        begin
-//        valid_input_2=1;
-//        in_data2=input_data;
-        end
         end
     S2: begin
         if(shift2)
@@ -110,11 +105,7 @@ always @(negedge clk)
         begin
         y<=1;
         neurons_finished2<=1;
-//        transferred2<=0;
         end
-        end
-//        if(finished2 =={NN2{1'b0}})
-//        neurons_finished2<=0;
         if(weights_loaded2=={NN2{1'b1}})
         begin
         layer_2_ready=1;
