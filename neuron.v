@@ -28,8 +28,6 @@ module neuron#(parameter INDATA_WIDTH = 17, PREVLAYER_COUNT =169, neuron_part_nu
     reg [9:0] weight_adress;
     reg [0:INDATA_WIDTH-1]in_data1;
     wire signed [0:WEIGHT_WIDTH-1] weight_val_out;
-//    wire weight_loaded;
-//    integer file,file1,i;
     reg read_enable;
     reg signed [WEIGHT_WIDTH-1:0]weight_val_in_buff;
     reg weight_valid_buff;
@@ -45,7 +43,6 @@ module neuron#(parameter INDATA_WIDTH = 17, PREVLAYER_COUNT =169, neuron_part_nu
     always @ (negedge clk)
     begin
        case(state)
-//        S0: if(start)state<=S1;
         S0: begin   
             if(load_weights_in && k==0)
             state<=S1;
@@ -80,20 +77,14 @@ module neuron#(parameter INDATA_WIDTH = 17, PREVLAYER_COUNT =169, neuron_part_nu
             product=0;
             finish=0;
             in_data1=0;
-//            bias=0;
-//            bias_from_RAM=0;
             bias_added=0;
             load_weight=0;
-//            neuron_out=0;
             weight_adress=0;
              instate_2=0;
              p=0;
             x=0;
             i=0;
             end
-//            file = $fopen(BIASFILE,"r");
-//            $fscanf(file,"%d",bias);                
-//            $fclose(file);
             end
         S1: begin
                 if((part_number ==neuron_part_number)&&(weight_valid) )
@@ -112,7 +103,6 @@ module neuron#(parameter INDATA_WIDTH = 17, PREVLAYER_COUNT =169, neuron_part_nu
             if(!valid_input)
             begin
             read_enable=1;
-//            in_data1=in_data;
             weight_adress = count;
             if(weight_val_out!=={(WEIGHT_WIDTH ){1'bx}} && in_data !=={INDATA_WIDTH{1'bx}})
             product = $signed(weight_val_out)*$signed(in_data);
@@ -121,8 +111,6 @@ module neuron#(parameter INDATA_WIDTH = 17, PREVLAYER_COUNT =169, neuron_part_nu
             if(product!=={INDATA_WIDTH+16{1'bx}})
             begin          
             sum = $signed(sum) + $signed(product);
-//            if(count <= PREVLAYER_COUNT)
-//            count = count+1;
             end
             end
             end
