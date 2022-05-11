@@ -42,7 +42,6 @@ module control_FNN #(parameter INDATA_WIDTH = 16, NN_L1=40, NN_L2=10, NN_L3=10, 
  wire finished4;
  wire [0:3]maximum;
  reg find_max;
-// reg reset_max_finder;
  reg control_reset;
  wire maxfound;
  wire layer_1_ready, layer_2_ready, layer_3_ready, layer_4_ready;
@@ -50,7 +49,6 @@ module control_FNN #(parameter INDATA_WIDTH = 16, NN_L1=40, NN_L2=10, NN_L3=10, 
  wire [0:NN_L2-1]neurons_instate_L2;
  wire [0:NN_L3-1]neurons_instate_L3;
  wire [0:NN_L4-1]neurons_instate_L4;
-//reg [INDATA_WIDTH-1:0]indata_mem[0:NO_INPUTS-1];
 integer count=1; 
 integer count2=1;
 integer count3=1;
@@ -204,7 +202,6 @@ max_finder #(.INDATA_WIDTH(INDATA_WIDTH+3+3+3+3),.NN4(NN_L4),.PREVLAYER_COUNT(NN
                layer3_input=0;
                layer4_input=0;
                FNN_ready_to_accept=0;
-//               reset_max_finder=1;
                stay_in_state2=1;
             end
         S1: begin
@@ -268,7 +265,6 @@ max_finder #(.INDATA_WIDTH(INDATA_WIDTH+3+3+3+3),.NN4(NN_L4),.PREVLAYER_COUNT(NN
                 
                 valid_input2=0;
                    shift1=1;
-//                count2=count2+1;
             end
             end
         S4: begin
@@ -284,7 +280,6 @@ max_finder #(.INDATA_WIDTH(INDATA_WIDTH+3+3+3+3),.NN4(NN_L4),.PREVLAYER_COUNT(NN
             if(neurons_instate_L1=={(NN_L1){1'b1}})
             begin
                 valid_input1=0;
-//                if()
                 FNN_ready_to_accept=1;
                 if(count>1&&i< NO_INPUTS)
                 begin
@@ -294,7 +289,6 @@ max_finder #(.INDATA_WIDTH(INDATA_WIDTH+3+3+3+3),.NN4(NN_L4),.PREVLAYER_COUNT(NN
                 else
                 layer1_input=0;
                 count=count+1;
-                
             end
             if(i==NO_INPUTS)
             begin
@@ -307,7 +301,6 @@ max_finder #(.INDATA_WIDTH(INDATA_WIDTH+3+3+3+3),.NN4(NN_L4),.PREVLAYER_COUNT(NN
             in_state_0=1;
             layer2_input=0;
             rstn3=0;
-//            valid_input1=1;
             if(restart)
             restart3=1;
             else
@@ -338,7 +331,6 @@ max_finder #(.INDATA_WIDTH(INDATA_WIDTH+3+3+3+3),.NN4(NN_L4),.PREVLAYER_COUNT(NN
             end
             
         S5: begin
-//            control_reset=0;
             // Since Layer1 is ready again with its data so it will start shifting its calculated data to Layer2
             layer1_input=0;
             in_state_0=1;
@@ -361,7 +353,6 @@ max_finder #(.INDATA_WIDTH(INDATA_WIDTH+3+3+3+3),.NN4(NN_L4),.PREVLAYER_COUNT(NN
                 
                 valid_input2=0;
                    shift1=1;
-//                count2=count2+1;
             end
             
             // Since Layer3 has finished its work so it will shift its data to layer4.
@@ -397,14 +388,12 @@ max_finder #(.INDATA_WIDTH(INDATA_WIDTH+3+3+3+3),.NN4(NN_L4),.PREVLAYER_COUNT(NN
             valid_input4=1;
             end
             max_finder_reset_allowed=1;
-//            reset_max_finder=1;
             end
         S6: begin
             // Since Layer2 has finished so it will transfer its data to layer3.
             in_state_0=1;
             layer2_input=0;
             rstn3=0;
-//            valid_input1=1;
             if(restart)
             restart3=1;
             else
@@ -444,7 +433,6 @@ max_finder #(.INDATA_WIDTH(INDATA_WIDTH+3+3+3+3),.NN4(NN_L4),.PREVLAYER_COUNT(NN
             if(neurons_instate_L1=={(NN_L1){1'b1}})
             begin
                 valid_input1=0;
-//                if(count==2)
                 FNN_ready_to_accept=1;
                 if(count>1&&i< NO_INPUTS)
                 begin
@@ -454,19 +442,16 @@ max_finder #(.INDATA_WIDTH(INDATA_WIDTH+3+3+3+3),.NN4(NN_L4),.PREVLAYER_COUNT(NN
                 else
                 layer1_input=0;
                 count=count+1;
-                
             end
             if(i==NO_INPUTS)
             begin
             FNN_ready_to_accept=0;
             stay_in_state2=0;
             end
-        
             // Layer4 will transfer its data to max_finder
             in_state_0=1;
             layer4_input=0;
             valid_input4=1;
-//            valid_input1=1;
             start4=0;
             shift3=0;
             if(finished4)
@@ -486,13 +471,10 @@ max_finder #(.INDATA_WIDTH(INDATA_WIDTH+3+3+3+3),.NN4(NN_L4),.PREVLAYER_COUNT(NN
             end
             end
         S7: begin
-            // Layer4 has completed its work so it is ready to accept from Layer3 which is ready.
             rstn4=0;
             in_state_0=1;
             layer3_input=0;
             valid_input3 =1;
-//            control_reset=0;
-//            valid_input1=1;
             start3=0;
             shift2=0;
             if(restart)
@@ -518,7 +500,6 @@ max_finder #(.INDATA_WIDTH(INDATA_WIDTH+3+3+3+3),.NN4(NN_L4),.PREVLAYER_COUNT(NN
             shift3=0;
             valid_input4=1;
             end
-//            reset_max_finder=1;
             ///////////////////////////////////////////////////////
             
             // Since Layer1 is also ready with its data and Layer2 has completed its work so data will be transferred from 1 to 2.
@@ -543,7 +524,6 @@ max_finder #(.INDATA_WIDTH(INDATA_WIDTH+3+3+3+3),.NN4(NN_L4),.PREVLAYER_COUNT(NN
                 
                 valid_input2=0;
                 shift1=1;
-//                count2=count2+1;
             end
             //////////////////////////////////////////////////////
             if(control_reset==0)
@@ -553,8 +533,6 @@ max_finder #(.INDATA_WIDTH(INDATA_WIDTH+3+3+3+3),.NN4(NN_L4),.PREVLAYER_COUNT(NN
             end
             in_state_0=1;
             shift4=0;
-//            valid_input5=1;
-//            valid_input1=1;
             max=maximum;
             finish_FNN=1;
             count2=1;
@@ -577,7 +555,6 @@ max_finder #(.INDATA_WIDTH(INDATA_WIDTH+3+3+3+3),.NN4(NN_L4),.PREVLAYER_COUNT(NN
             if(neurons_instate_L1=={(NN_L1){1'b1}})
             begin
                 valid_input1=0;
-//                if(count==2)
                 FNN_ready_to_accept=1;
                 if(count>1&&i< NO_INPUTS)
                 begin
@@ -611,7 +588,6 @@ max_finder #(.INDATA_WIDTH(INDATA_WIDTH+3+3+3+3),.NN4(NN_L4),.PREVLAYER_COUNT(NN
             
             count2 =count2+1;
             shift4=1;
-//            reset_max_finder=0;
             stop_iteration=1;
             end
             if(maxfound)
@@ -624,7 +600,6 @@ max_finder #(.INDATA_WIDTH(INDATA_WIDTH+3+3+3+3),.NN4(NN_L4),.PREVLAYER_COUNT(NN
              in_state_0=1;
             layer2_input=0;
             rstn3=0;
-//            valid_input1=1;
             if(restart)
             restart3=1;
             else
@@ -639,12 +614,10 @@ max_finder #(.INDATA_WIDTH(INDATA_WIDTH+3+3+3+3),.NN4(NN_L4),.PREVLAYER_COUNT(NN
                 restart2=0;
                 if(neurons_instate_L3=={(NN_L3){1'b1}})
                 begin
-                
                 shift2=1;
                 valid_input3=0;
                 count3=count3+1;
                 end
-                
             end
             if(finished3)
             begin
@@ -653,10 +626,7 @@ max_finder #(.INDATA_WIDTH(INDATA_WIDTH+3+3+3+3),.NN4(NN_L4),.PREVLAYER_COUNT(NN
             shift2=0;
             valid_input3=1;
             end
-           
-            
             in_state_0=1;
-//            find_max=0;
             end
        endcase
      end
