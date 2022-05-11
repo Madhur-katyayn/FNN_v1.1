@@ -39,48 +39,6 @@ always
 	         loaded_in_memory=1;
 	    end
 	    
-//always @(negedge clk)
-//begin
-//if(count==3)
-//load_weights=1;
-//if(x==0)
-//begin
-//if(count>3)
-//begin
-//weight_valid=1;
-//weight_bus=weight_bus_memory[count2];
-//count2=count2+1;
-////end
-//end
-//count=count+1;
-//if(FNN_ready)
-//begin
-//x=1;
-//weight_valid=0;
-//load_weights=0;
-//start_FNN=1;
-//ready_in=1;
-//end
-//end
-//if(FNN_ready_to_accept)
-//begin
-//if(i<NO_OF_INPUTS)
-//begin
-//input_image=indata_mem[i] ;
-//i=i+1;
-//end
-//end
-
-//if(finish_FNN)
-//begin
-//restart=1;
-//end
-////else if(finish_FNN==0)
-////begin
-////restart=0;
-////end
-//end
-
 
 always @(negedge clk)
 begin
@@ -122,7 +80,6 @@ S1: begin
     weight_valid=1;
     weight_bus=weight_bus_memory[count2];
     count2=count2+1;
-//end
     end
     count=count+1;
     end
