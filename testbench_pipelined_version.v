@@ -25,7 +25,6 @@ begin
 clk=0;
 count=0;
 count2=0;
-//restart=1;
 end
 
 
